@@ -9,5 +9,4 @@
 //= require json2
 //= require underscore
 //= require backbone
-//= require todos
 //= require_tree .
