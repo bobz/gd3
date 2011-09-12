@@ -1,39 +1,35 @@
 <h1>Listing goals</h1>
-<div id="goalapp">
-<div class="list_table_container">
-<table class="list_table">
-  <THEAD>
-  <tr>
-    <th>Title</th>
-    <th>Description</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-  </THEAD>
-  <TBODY id="list_table_body_id" class="list_table_body">
+  <div id="goalapp">
+	<div class="list_table_container">
+	  <table class="list_table">
+		<THEAD>
+		  <tr>
+			<th>Title</th>
+			<th></th>
+		  </tr>
+		</THEAD>
+		<TBODY id="list_table_body_id" class="list_table_body">
+		<% @goals.each do |goal| %>
+		  <tr>
+			<td><input id="<%= goal.id %>" type="button" value="<%= goal.title %>" /></td>
+			<td><%= link_to 'Destroy', goal, confirm: 'Are you sure?', method: :delete %></td>
+		  </tr>
+		<% end %>
+		</TBODY>
+	  </table>
+	</div>
+	<br />
+	<%= link_to 'New Goal', new_goal_path %>
+	<br />
+  </div>
 
-<% @goals.each do |goal| %>
-  <tr>
-	<td><input id="<%= goal.id %>" type="button" value="<%= goal.title %>" /></td>
-    <td><%= link_to 'Destroy', goal, confirm: 'Are you sure?', method: :delete %></td>
-  </tr>
-<% end %>
-  </TBODY>
-</table>
-</div>
-<br />
-<%= link_to 'New Goal', new_goal_path %>
-<br />
-</div>
+  <div> 
+	<div class="field" >
+	  <input id="goaltitletext" class="text-input" type="text" value="" disabled="true" />
+	</div>
 
-<div> 
-<div class="field" >
-  <input id="goaltitletext" class="text-input" type="text" value="" disabled="true" />
-</div>
-
-<div class="field">
-  <input id="goaldesctext" class="text-input" type="text" value="" disabled="true" />
-</div>
-</div>
+	<div class="field">
+	  <input id="goaldesctext" class="text-input" type="text" value="" disabled="true" />
+	</div>
+  </div>
 </div>
