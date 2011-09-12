@@ -94,6 +94,7 @@ $(function(){
 	    $('#goaltitletext').val(this.activeGoal.get('title'));
 	    $('#goaldesctext').val(this.activeGoal.get('description'));
 	  
+	    $('#goaltitlefield .field_display .content').html(this.activeGoal.get('title'));
 	  
 	  }
     },
@@ -108,14 +109,16 @@ $(function(){
     },
 
     // Close the `"editing"` mode, saving changes to the goal.
-    close: function() {
-      this.model.save({content: this.input.val()});
-      $(this.el).removeClass("editing");
+    close: function(e) {
+	  var textfield=$(e.currentTarget);
+      this.activeGoal.save({title: textfield.val()});
+      var li=textfield.parent().parent()
+	  li.removeClass("editing");
     },
 
     // If you hit `enter`, we're through editing the item.
     updateOnEnter: function(e) {
-      if (e.keyCode == 13) this.close();
+      if (e.keyCode == 13) this.close(e);
     },
 
     // Add all items in the **Goals** collection at once.
