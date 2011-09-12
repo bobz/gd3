@@ -68,6 +68,21 @@ $(function(){
 
 	activeGoal: null,
 
+	setActiveGoal: function(goal)
+	{
+	  if (null != this.activeGoal)
+	  {
+	    this.activeGoal.unbind('change');
+	  }
+
+	  this.activeGoal = goal;
+
+	  if (null != this.activeGoal)
+	  {
+	    this.activeGoal.bind('change', this.render, this);
+      }
+	},
+
     events: {
 	  "click input[type=button]"            : "selection",
       "dblclick div.content" : "edit",
@@ -133,7 +148,7 @@ $(function(){
 
     selection: function(event){
       console.info("selection of " + event.currentTarget.id);
-	  this.activeGoal = Goals.get(event.currentTarget.id);
+	  this.setActiveGoal( Goals.get(event.currentTarget.id));
 	  this.render();
 	},
 	
