@@ -86,7 +86,7 @@ $(function(){
     events: {
 	  "click input[type=button]"            : "selection",
       "dblclick div.content" : "edit",
-      "keypress .text-input"      : "updateOnEnter"
+      "keyup .text-input"      : "updateOnEnter"
 	},
 
     initialize: function() {
@@ -126,6 +126,15 @@ $(function(){
       li.find('.text-input').focus();
     },
 
+    // If you hit `enter`, we're through editing the item.
+    updateOnEnter: function(e) {
+	  var KEYCODE_ENTER = 13;
+	  var KEYCODE_ESC = 27;
+
+      if (e.which == KEYCODE_ENTER) this.close(e);
+      if (e.which == KEYCODE_ESC) this.cancel(e);
+    },
+
     // Close the `"editing"` mode, saving changes to the goal.
     close: function(e) {
 	  var textfield=$(e.currentTarget);
@@ -134,9 +143,12 @@ $(function(){
 	  li.removeClass("editing");
     },
 
-    // If you hit `enter`, we're through editing the item.
-    updateOnEnter: function(e) {
-      if (e.keyCode == 13) this.close(e);
+    // Close the `"editing"` mode, saving changes to the goal.
+    cancel: function(e) {
+	  var textfield=$(e.currentTarget);
+      var li=textfield.parent().parent()
+	  li.removeClass("editing");
+	  this.render();
     },
 
     // Add all items in the **Goals** collection at once.
