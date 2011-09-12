@@ -91,6 +91,7 @@ $(function(){
 
     initialize: function() {
       Goals.fetch();
+	  this.render();
     },
 
     // Re-rendering the App just means refreshing the statistics -- the rest
@@ -100,11 +101,13 @@ $(function(){
 	  {
 	    $(':text').val('');
 	    $(':text').attr('disabled', true);
+		$('#input-fields').hide();
 	  }
 	  else
 	  {
 	    console.info("enabling inputs");
 	    //var mygoaltitle = $('#goaltitle');
+		$('#input-fields').show();
 	    $(':text').removeAttr('disabled');
 	    $('#goaltitletext').val(this.activeGoal.get('title'));
 	    $('#goaldesctext').val(this.activeGoal.get('description'));
