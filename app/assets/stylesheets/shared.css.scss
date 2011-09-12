@@ -1,0 +1,162 @@
+/* should variablize this */
+$small_padding: 3px;
+$banner_height: 30px;
+$default_padding: 3px;
+
+body
+{
+	margin: 0px;
+	padding: 0px;
+	width: 100%;
+}
+
+#app_container
+{
+	width: 100%;
+	position: absolute;
+	top: $banner_height;
+	bottom: 20px;
+}
+
+#app_header
+{
+	width: 100%;
+	height: 100%;
+	height: $banner_height;
+	background-color: #eee;
+	vertical-align: center;
+}
+#app_header DIV.breadcrumb_container {
+	display: inline-block; 
+	A, SPAN { margin-left: 5px; margin-right: 5px; }
+}
+#app_header A.sign_out { margin-right: 20px; margin-left: 10px; }
+#app_header BUTTON.save_button { display: none; }
+
+
+#app_navigator
+{
+	width: 300px;
+	padding: 10px; 
+	position: absolute;
+	overflow-y: scroll;
+	height: 100%;
+}
+
+
+#app_editor
+{
+	margin-left: 330px;
+	padding: 10px; 
+	overflow-y: scroll;
+	height: 100%;
+}
+#app_editor DIV.navigation_button_strip
+{
+	height: $banner_height;
+	background-color: #eee;
+}
+
+
+DIV.worksheet_editor DIV.editor_title
+{
+	font-size: 18px;
+	padding-bottom: 30px; 
+}
+
+DIV.form_section_header
+{
+	font-weight: bold;
+	font-size: 14px;
+	border: 1px solid black;
+	background-color: #eee;
+	padding: $small_padding; 
+	margin-bottom: 5px; 
+}
+
+UL.savant_complex_list
+{
+	margin: 0;
+	padding: 0;
+}
+
+UL.savant_complex_list LI
+{
+	list-style: none;
+}
+
+UL.savant_complex_list LI INPUT
+{
+	width: 95%;
+}
+UL.savant_complex_list LI LABEL
+{
+	display: block;
+}
+
+
+DIV.worksheet_editor FORM DIV.actions INPUT, FORM DIV.actions BUTTON
+{
+	display: none;
+}
+
+
+DIV.session_info { float: right; }
+
+
+/* hack on positioning the flash */
+DIV.flash { cursor: pointer; display: none; font-weight: bold; position: fixed; top: 0px; background-color: #ffc; padding: 5px; border: 1px solid #ccc; }
+DIV.flash.alert { color: red; }
+DIV.flash.error { color: red; }
+DIV.flash.notice { color: green; }
+
+#app_navigator UL.navigator_panels { margin: 0px; padding: 0px; width: 100%; }
+
+DIV.navigator_panel { border: 1px solid black; margin-bottom: 15px; }
+DIV.navigator_panel DIV.caption { font-weight: bold; background-color: #9cf; border-bottom: 1px solid black; padding-left: 10px; }
+DIV.navigator_panel UL.navigator_panels { list-style: none; margin: 0px; padding: 0px; }
+
+DIV.navigator_panel UL.navigator_panel_items { list-style: none; margin: 0px; padding: 0px; }
+DIV.navigator_panel UL.navigator_panel_items LI { list-style: none; margin: 0px; padding: 0px; padding: 3px; padding-left: 10px; }
+DIV.navigator_panel UL.navigator_panel_items LI.selected_key { font-weight: bold; }
+
+
+
+TABLE.list_table { border: 1px solid black; border-collapse: collapse; border-spacing: 0px; width: 100%; }
+TABLE.list_table THEAD TH { padding: $default_padding; }
+TABLE.list_table THEAD { font-weight: bold; background-color: indianRed; border-bottom: 1px solid black; text-align: left; }
+TABLE.list_table TBODY TR { background-color: white; }
+TABLE.list_table TBODY TR:nth-child(even) { background-color: #f1f3f7; }
+TABLE.list_table TBODY TR.selected { background-color: #39f; }
+TABLE.list_table TBODY TD { padding: $default_padding; }
+ 
+DIV.list_table_target { margin-top: 20px; border: 1px solid black; background-color: #eee; padding: 10px; }
+
+TBODY.list_table_body tr:hover {
+  background-color: #ff8080 !important;
+}
+
+A { color: black; }
+A:visited { color: black; }
+
+
+
+/* FORMTASTIC */
+LABEL.label { display: block; }
+FORM.formtastic {
+	LI {
+		list-style: none;
+		margin-bottom: 10px;
+		
+		INPUT, TEXTAREA { width: 100%; }
+	}
+	FIELDSET.buttons {
+		/* display: none; */
+	}
+}
+
+/* not sure why we need this - it should be set in the scaffolds but it's not coming out in the browser */
+BODY {
+	font-family: verdana, arial, helvetica, sans-serif;
+	font-size: 13px;
+}

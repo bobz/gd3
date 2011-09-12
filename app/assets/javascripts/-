@@ -27,13 +27,13 @@
 <br />
 </div>
 
-<div> 
-<div class="field" >
-  <input id="goaltitletext" class="text-input" type="text" value="" disabled="true" />
+<div id="input-fields"
+<div class="field" id="goaltitle">
+  <input class="text-input" type="text" value="" disabled="true">
 </div>
 
-<div class="field">
-  <input id="goaldesctext" class="text-input" type="text" value="" disabled="true" />
+<div class="field" id="description">
+  <input class="text-input" type="text" value="" disabled="true">
 </div>
 </div>
 </div>
