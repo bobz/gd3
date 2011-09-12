@@ -99,9 +99,12 @@ $(function(){
     },
 
     // Switch this view into `"editing"` mode, displaying the input field.
-    edit: function() {
-      $(this.el).addClass("editing");
-      this.input.focus();
+    edit: function(e) {
+	  console.info("Editing");
+	  var curTar = e.currentTarget;
+	  var li = $(e.currentTarget).parent().parent();
+      li.addClass("editing");
+      li.find('.text-input').focus();
     },
 
     // Close the `"editing"` mode, saving changes to the goal.

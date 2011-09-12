@@ -139,7 +139,32 @@ TBODY.list_table_body tr:hover {
 A { color: black; }
 A:visited { color: black; }
 
-
+#input-fields li.editing {
+      padding: 0;
+      border-bottom: 0;
+    }
+#input-fields .editing .display,
+#input-fields .text-input {
+    display: none;
+  }
+  #input-fields .editing .text-input {
+      display: block;
+    }
+  #input-fields .editing input {
+      width: 444px;
+      font-size: 24px;
+      font-family: inherit;
+      margin: 0;
+      line-height: 1.6em;
+      border: 0;
+      outline: none;
+      padding: 10px 7px 0px 27px;
+      border: 1px solid #999999;
+      -moz-box-shadow: rgba(0, 0, 0, 0.2) 0 1px 2px 0 inset;
+      -webkit-box-shadow: rgba(0, 0, 0, 0.2) 0 1px 2px 0 inset;
+      -o-box-shadow: rgba(0, 0, 0, 0.2) 0 1px 2px 0 inset;
+      box-shadow: rgba(0, 0, 0, 0.2) 0 1px 2px 0 inset;
+    }
 
 /* FORMTASTIC */
 LABEL.label { display: block; }
