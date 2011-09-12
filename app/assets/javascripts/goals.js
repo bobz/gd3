@@ -55,74 +55,6 @@ $(function(){
   // Goal Item View
   // --------------
 
-  // The DOM element for a goal item...
-  window.GoalView = Backbone.View.extend({
-
-
-    el: $("#input-fields"),
-
-    // The DOM events specific to an item.
-    events: {
-      "dblclick div.goal-content" : "edit",
-      "click span.goal-destroy"   : "clear",
-      "keypress .goal-input"      : "updateOnEnter"
-
-    },
-
-    // The GoalView listens for changes to its model, re-rendering. Since there's
-    // a one-to-one correspondence between a **Goal** and a **GoalView** in this
-    // app, we set a direct reference on the model for convenience.
-    initialize: function() {
-      this.model.bind('change', this.render, this);
-      this.model.bind('destroy', this.remove, this);
-    },
-
-    // Re-render the contents of the goal item.
-    render: function() {
-      $(this.el).html(this.template(this.model.toJSON()));
-      this.setContent();
-      return this;
-    },
-
-    // To avoid XSS (not that it would be harmful in this particular app),
-    // we use `jQuery.text` to set the contents of the goal item.
-    setContent: function() {
-      var content = this.model.get('content');
-      this.$('.goal-content').text(content);
-      this.input = this.$('.goal-input');
-      this.input.bind('blur', _.bind(this.close, this));
-      this.input.val(content);
-    },
-
-
-    // Switch this view into `"editing"` mode, displaying the input field.
-    edit: function() {
-      $(this.el).addClass("editing");
-      this.input.focus();
-    },
-
-    // Close the `"editing"` mode, saving changes to the goal.
-    close: function() {
-      this.model.save({content: this.input.val()});
-      $(this.el).removeClass("editing");
-    },
-
-    // If you hit `enter`, we're through editing the item.
-    updateOnEnter: function(e) {
-      if (e.keyCode == 13) this.close();
-    },
-
-    // Remove this view from the DOM.
-    remove: function() {
-      $(this.el).remove();
-    },
-
-    // Remove the item, destroy the model.
-    clear: function() {
-      this.model.destroy();
-    }
-
-  });
 
   // The Application
   // ---------------
@@ -137,7 +69,9 @@ $(function(){
 	activeGoal: null,
 
     events: {
-	  "click input[type=button]"            : "selection"
+	  "click input[type=button]"            : "selection",
+      "dblclick div.content" : "edit",
+      "keypress .text-input"      : "updateOnEnter"
 	},
 
     initialize: function() {
@@ -158,12 +92,27 @@ $(function(){
 	    //var mygoaltitle = $('#goaltitle');
 	    $(':text').removeAttr('disabled');
 	    $('#goaltitletext').val(this.activeGoal.get('title'));
-		var a = this.activeGoal.get('description');
-		var b = $('#goaldesctext');
 	    $('#goaldesctext').val(this.activeGoal.get('description'));
 	  
 	  
 	  }
+    },
+
+    // Switch this view into `"editing"` mode, displaying the input field.
+    edit: function() {
+      $(this.el).addClass("editing");
+      this.input.focus();
+    },
+
+    // Close the `"editing"` mode, saving changes to the goal.
+    close: function() {
+      this.model.save({content: this.input.val()});
+      $(this.el).removeClass("editing");
+    },
+
+    // If you hit `enter`, we're through editing the item.
+    updateOnEnter: function(e) {
+      if (e.keyCode == 13) this.close();
     },
 
     // Add all items in the **Goals** collection at once.
