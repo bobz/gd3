@@ -186,6 +186,28 @@ $(function(){
 	  this.render();
     },
 
+    // Add all items in the **Goals** collection at once.
+    addAll: function() {
+
+    },
+
+    // Generate the attributes for a new Goal item.
+    newAttributes: function() {
+        
+    },
+ // Add a single todo item to the list by creating a view for it, and
+    // appending its element to the `<ul>`.
+    addOne: function(todo) {
+      var view = new TodoView({model: todo});
+      this.$("#todo-list").append(view.render().el);
+    },
+
+    // Add all items in the **Todos** collection at once.
+    addAll: function() {
+      Todos.each(this.addOne);
+    },
+
+    // Generate the attributes for a n
     selection: function(event){
       console.info("selection of " + event.currentTarget.id);
 	  window.Goals.setActiveGoal( Goals.get(event.currentTarget.id));
