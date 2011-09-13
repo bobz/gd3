@@ -52,9 +52,14 @@ $(function(){
   window.Goals = new GoalList;
 
 
-  // Goal Item View
-  // --------------
-
+  // ERB-style delimiters are not suitable
+  // Apply Mustache-style delimiters:
+  //    {% statements %} for executing arbitrary JavaScript code
+  //    {{ var }}        for interpolating values
+  _.templateSettings = {
+	  evaluate    : /\{%([\s\S]+?)%\}/g,
+	  interpolate : /\{\{([\s\S]+?)\}\}/g
+  };
 
   // The Application
   // ---------------
@@ -67,6 +72,8 @@ $(function(){
     el: $("#goalapp"),
 
 	activeGoal: null,
+	
+	inputFieldTemplate: _.template($('#input-field-template').html()),
 
 	setActiveGoal: function(goal)
 	{
@@ -97,22 +104,13 @@ $(function(){
     // Re-rendering the App just means refreshing the statistics -- the rest
     // of the app doesn't change.
     render: function() {
-	  if( null == this.activeGoal)
+	  if( null != this.activeGoal)
 	  {
-	    $(':text').val('');
-	    $(':text').attr('disabled', true);
-		$('#input-fields').hide();
-	  }
-	  else
-	  {
-	    console.info("enabling inputs");
 	    //var mygoaltitle = $('#goaltitle');
-		$('#input-fields').show();
-	    $(':text').removeAttr('disabled');
-	    $("#input\\[title\\]").val(this.activeGoal.get('title'));
-	    $('#goaldesctext').val(this.activeGoal.get('description'));
-	  
-	    $("#field\\[title\\] .field_display .content").html(this.activeGoal.get('title'));
+		this.$('#input-fields').html(this.inputFieldTemplate({
+		  fieldName:   'title',
+		  fieldValue:       this.activeGoal.get('title')
+		}));
 	  
 	  }
     },
