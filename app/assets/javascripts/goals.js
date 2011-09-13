@@ -109,10 +109,10 @@ $(function(){
 	    //var mygoaltitle = $('#goaltitle');
 		$('#input-fields').show();
 	    $(':text').removeAttr('disabled');
-	    $('#goaltitletext').val(this.activeGoal.get('title'));
+	    $("#input\\[title\\]").val(this.activeGoal.get('title'));
 	    $('#goaldesctext').val(this.activeGoal.get('description'));
 	  
-	    $('#goaltitlefield .field_display .content').html(this.activeGoal.get('title'));
+	    $("#field\\[title\\] .field_display .content").html(this.activeGoal.get('title'));
 	  
 	  }
     },
