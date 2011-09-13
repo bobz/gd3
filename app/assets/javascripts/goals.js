@@ -143,8 +143,21 @@ $(function(){
 
     // Close the `"editing"` mode, saving changes to the goal.
     close: function(e) {
+      var cT = e.currentTarget;
 	  var textfield=$(e.currentTarget);
-      this.activeGoal.save({title: textfield.val()});
+      var id=e.currentTarget.id;
+      var property = null;
+      if (id.match(  /input\[(.*)\]/))
+      {
+        property = RegExp.$1;
+        var hash = {};
+        hash[property] = textfield.val();
+        this.activeGoal.save(hash);
+      }
+      else
+      {
+        alert("error parsing: " + id);
+      }
       var li=textfield.parent().parent()
 	  li.removeClass("editing");
     },
@@ -152,7 +165,7 @@ $(function(){
     // Close the `"editing"` mode, saving changes to the goal.
     cancel: function(e) {
 	  var textfield=$(e.currentTarget);
-      var li=textfield.parent().parent()
+      var li=textfield.parent().parent();
 	  li.removeClass("editing");
 	  this.render();
     },
