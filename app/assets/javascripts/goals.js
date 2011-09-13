@@ -107,10 +107,18 @@ $(function(){
 	  if( null != this.activeGoal)
 	  {
 	    //var mygoaltitle = $('#goaltitle');
-		this.$('#input-fields').html(this.inputFieldTemplate({
+        //
+		this.$('#input-fields').html(
+          this.inputFieldTemplate({
 		  fieldName:   'title',
 		  fieldValue:       this.activeGoal.get('title')
-		}));
+		  }) + 
+          this.inputFieldTemplate({
+		  fieldName:   'description',
+		  fieldValue:       this.activeGoal.get('description')
+		  }) 
+          
+          );
 	  
 	  }
     },
