@@ -139,10 +139,24 @@ TBODY.list_table_body tr:hover {
 A { color: black; }
 A:visited { color: black; }
 
+#input-fields li {
+  list-style: none;
+}
+#input-fields .field_display {
+  border-radius: 15px;
+  border-color: gray;
+  border-style: dotted;
+  width: 444px;
+  padding: 10px 7px 0px 27px;
+}
 #input-fields li.editing {
       padding: 0;
       border-bottom: 0;
     }
+#input-fields .label{
+  font-size:16px;
+  color: gray; 
+}
 #input-fields .editing .field_display,
 #input-fields .text-input {
     display: none;
@@ -152,7 +166,7 @@ A:visited { color: black; }
     }
   #input-fields .editing input {
       width: 444px;
-      font-size: 24px;
+      font-size: 18px;
       font-family: inherit;
       margin: 0;
       line-height: 1.6em;
