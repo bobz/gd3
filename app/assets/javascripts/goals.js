@@ -46,6 +46,18 @@ $(function(){
 
     url :'/goals',
 
+	activeGoal: null,
+
+	setActiveGoal: function(newGoal)
+	{
+
+      var oldGoal = this.activeGoal;
+	  this.activeGoal = newGoal;
+
+	  this.trigger('activeGoal:change', oldGoal, newGoal);
+	},
+
+
   });
 
   // Create our global collection of **Goals**.
@@ -71,51 +83,55 @@ $(function(){
     // the App already present in the HTML.
     el: $("#goalapp"),
 
-	activeGoal: null,
-	
 	inputFieldTemplate: _.template($('#input-field-template').html()),
-
-	setActiveGoal: function(goal)
-	{
-	  if (null != this.activeGoal)
-	  {
-	    this.activeGoal.unbind('change');
-	  }
-
-	  this.activeGoal = goal;
-
-	  if (null != this.activeGoal)
-	  {
-	    this.activeGoal.bind('change', this.render, this);
-      }
-	},
 
     events: {
 	  "click input[type=button]"            : "selection",
       "dblclick div.content" : "edit",
-      "keyup .text-input"      : "updateOnEnter"
+      "keyup .text-input"      : "updateOnEnter",
 	},
-
+	
     initialize: function() {
+      window.Goals.bind('activeGoal:change', this.newActiveGoal, this);
+
       Goals.fetch();
 	  this.render();
     },
 
+	
+	newActiveGoal: function(oldGoal, newGoal)
+	{
+	  alert("in newActiveGoal with" + oldGoal + newGoal);
+	  if (null != oldGoal)
+	  {
+	    oldGoal.unbind('change');
+	  }
+
+	  if (null != newGoal)
+	  {
+	    newGoal.bind('change', this.render, this);
+      }
+
+	  this.render;
+	},
+
+
     // Re-rendering the App just means refreshing the statistics -- the rest
     // of the app doesn't change.
     render: function() {
-	  if( null != this.activeGoal)
+	  var activeGoal = Goals.activeGoal;
+	  if( null != activeGoal)
 	  {
 	    //var mygoaltitle = $('#goaltitle');
         //
 		this.$('#input-fields').html(
           this.inputFieldTemplate({
 		  fieldName:   'title',
-		  fieldValue:       this.activeGoal.get('title')
+		  fieldValue:       activeGoal.get('title')
 		  }) + 
           this.inputFieldTemplate({
 		  fieldName:   'description',
-		  fieldValue:       this.activeGoal.get('description')
+		  fieldValue:       activeGoal.get('description')
 		  }) 
           
           );
@@ -152,7 +168,7 @@ $(function(){
         property = RegExp.$1;
         var hash = {};
         hash[property] = textfield.val();
-        this.activeGoal.save(hash);
+        Goals.activeGoal.save(hash);
       }
       else
       {
@@ -170,19 +186,9 @@ $(function(){
 	  this.render();
     },
 
-    // Add all items in the **Goals** collection at once.
-    addAll: function() {
-
-    },
-
-    // Generate the attributes for a new Goal item.
-    newAttributes: function() {
-        
-    },
-
     selection: function(event){
       console.info("selection of " + event.currentTarget.id);
-	  this.setActiveGoal( Goals.get(event.currentTarget.id));
+	  window.Goals.setActiveGoal( Goals.get(event.currentTarget.id));
 	  this.render();
 	},
 	
