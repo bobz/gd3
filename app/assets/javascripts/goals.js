@@ -101,7 +101,7 @@ $(function(){
 	
 	newActiveGoal: function(oldGoal, newGoal)
 	{
-	  alert("in newActiveGoal with" + oldGoal + newGoal);
+	  // alert("in newActiveGoal with" + oldGoal + newGoal);
 	  if (null != oldGoal)
 	  {
 	    oldGoal.unbind('change');
